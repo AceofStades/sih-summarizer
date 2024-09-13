@@ -1,4 +1,4 @@
-from transformers import BartTokenizer, BartModel
+from transformers import BartTokenizer, BartModel, pipeline
 
 tokenizer = BartTokenizer.from_pretrained('facebook/bart-base')
 model = BartModel.from_pretrained('facebook/bart-base')
