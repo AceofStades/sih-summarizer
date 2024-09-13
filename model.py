@@ -1,9 +1,7 @@
-from transformers import PegasusForConditionalGeneration, PegasusTokenizer, pipeline
+from transformers import BartTokenizer, BartModel
 
-# Load the tokenizer and model
-model_name = "google/pegasus-xsum"
-pegasus_tokenizer = PegasusTokenizer.from_pretrained(model_name)
-pegasus_model = PegasusForConditionalGeneration.from_pretrained(model_name)
+tokenizer = BartTokenizer.from_pretrained('facebook/bart-base')
+model = BartModel.from_pretrained('facebook/bart-base')
 
 # Define function for decoding summary (title summary)
 def title_summary(text):
@@ -11,13 +9,13 @@ def title_summary(text):
     Generates a short summary (title-like) from the input text.
     """
     # Tokenize and create input for the model
-    tokens = pegasus_tokenizer(text, truncation=True, padding="longest", return_tensors="pt")
+    tokens = tokenizer(text, truncation=True, padding="longest", return_tensors="pt")
 
     # Generate a short summary
-    encoded_summary = pegasus_model.generate(**tokens)
+    encoded_summary = model.generate(**tokens)
 
     # Decode the summarized text and return it
-    decoded_summary = pegasus_tokenizer.decode(encoded_summary[0], skip_special_tokens=True)
+    decoded_summary = tokenizer.decode(encoded_summary[0], skip_special_tokens=True)
     return decoded_summary
 
 # Define function for longer summary
@@ -27,8 +25,8 @@ def detailed_summary(text, min_length=30, max_length=150):
     """
     summarizer = pipeline(
         "summarization",
-        model=pegasus_model,
-        tokenizer=pegasus_tokenizer,
+        model=model,
+        tokenizer=tokenizer,
         framework="pt"
     )
 
