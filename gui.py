@@ -5,7 +5,7 @@ from model import title_summary, detailed_summary
 st.file_uploader("Upload your document:", type=["pdf", "docx", "doc"], accept_multiple_files=False, key="doc", help=None)
 text = st.text_area(label = "Enter your text to summarize", max_chars=2000, placeholder="Max characters: 2000", height=400)
 
-def typewriter(text: str, speed = 10):
+def typewriter(text: str, speed=10):
     tokens = text.split()
     container = st.empty()
     for index in range(len(tokens) + 1):
@@ -14,7 +14,8 @@ def typewriter(text: str, speed = 10):
         time.sleep(1 / speed)
 
 if st.button("Summarize"):
-	title = title_summary(text)
-	detailed = detailed_summary(text)
+	with st.spinner('Wait for it... (This might take a while)'):
+		title = title_summary(text)
+		detailed = detailed_summary(text)
 	typewriter("Title:" + title)
 	typewriter("Summary:" + detailed)
