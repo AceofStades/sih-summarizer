@@ -14,6 +14,6 @@ def typewriter(text: str, speed=10):
         time.sleep(1 / speed)
 
 if st.button("Summarize"):
-	with st.spinner('Wait for it... (This might take a while)'):
+	with st.spinner('Wait for it... (This may take some time)'):
 		summarized = summary(text)
 	typewriter("Summary: " + summarized)
