@@ -25,8 +25,8 @@ Walter Chrysler had set out to build the tallest building in the world, a compet
 Once the competitor could rise no higher, the spire of the Chrysler building was raised into view, giving it the title.
 '''
 
-def summary():
+def summary(text):
 	model = Summarizer()
-	result = model(body, min_length=60)
+	result = model(text, ratio = 0.3)
 	full = ''.join(result)
 	return full

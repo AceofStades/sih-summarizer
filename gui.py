@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-from model import title_summary, detailed_summary
+from model import summary
 
 st.file_uploader("Upload your document:", type=["pdf", "docx", "doc"], accept_multiple_files=False, key="doc", help=None)
 text = st.text_area(label = "Enter your text to summarize", max_chars=2000, placeholder="Max characters: 2000", height=400)
@@ -15,7 +15,5 @@ def typewriter(text: str, speed=10):
 
 if st.button("Summarize"):
 	with st.spinner('Wait for it... (This might take a while)'):
-		title = title_summary(text)
-		detailed = detailed_summary(text)
-	typewriter("Title:" + title)
-	typewriter("Summary:" + detailed)
+		summarized = summary(text)
+	typewriter("Summary: " + summarized)
