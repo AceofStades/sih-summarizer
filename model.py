@@ -1,5 +1,3 @@
-from transformers import BartTokenizer, BartModel, pipeline
-
 from summarizer import Summarizer
 
 body = '''
@@ -27,13 +25,8 @@ Walter Chrysler had set out to build the tallest building in the world, a compet
 Once the competitor could rise no higher, the spire of the Chrysler building was raised into view, giving it the title.
 '''
 
-model = Summarizer()
-result = model(body, min_length=60)
-full = ''.join(result)
-print(full)
-"""
-The Chrysler Building, the famous art deco New York skyscraper, will be sold for a small fraction of its previous sales price.
-The building sold fairly quickly after being publicly placed on the market only two months ago.
-The incentive to sell the building at such a huge loss was due to the soaring rent the owners pay to Cooper Union, a New York college, for the land under the building.'
-Still the building is among the best known in the city, even to people who have never been to New York.
-"""
+def summary():
+	model = Summarizer()
+	result = model(body, min_length=60)
+	full = ''.join(result)
+	return full
