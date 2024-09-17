@@ -1,9 +1,7 @@
 import streamlit as st
 import time
 from model import summary
-
-st.file_uploader("Upload your document:", type=["pdf", "docx", "doc"], accept_multiple_files=False, key="doc", help=None)
-text = st.text_area(label = "Enter your text to summarize", max_chars=2000, placeholder="Max characters: 2000", height=400)
+from textExtract import extract_text
 
 def typewriter(text: str, speed=10):
     tokens = text.split()
@@ -13,7 +11,23 @@ def typewriter(text: str, speed=10):
         container.markdown(curr_full_text)
         time.sleep(1 / speed)
 
-if st.button("Summarize"):
-	with st.spinner('Wait for it... (This may take some time)'):
-		summarized = summary(text)
-	typewriter("Summary: " + summarized)
+def summarize_button(text):
+	if st.button("Summarize"):
+		with st.spinner('Wait for it... (This may take some time)'):
+			summarized = summary(text)
+		typewriter("Summary: " + summarized)
+
+uploaded_file = st.file_uploader("Upload your document:", type=["pdf"], accept_multiple_files=False, key="doc", help=None)
+if uploaded_file is not None:
+	text = extract_text(uploaded_file)
+	summarize_button(text)
+
+uploaded_text = st.text_area(label = "Enter your text to summarize", max_chars=10000, placeholder="Max characters: 10000", height=400)
+if uploaded_text is not "":
+	summarize_button(uploaded_text)
+
+
+# if st.button("Summarize"):
+# 	with st.spinner('Wait for it... (This may take some time)'):
+# 		summarized = summary(text)
+# 	typewriter("Summary: " + summarized)
