@@ -56,6 +56,7 @@ pydantic==2.9.1
 pydantic_core==2.23.3
 pydeck==0.9.1
 Pygments==2.18.0
+pypdf==4.3.1
 python-dateutil==2.9.0.post0
 pytz==2024.2
 PyYAML==6.0.2
