@@ -3,7 +3,7 @@ import time
 from model import summary
 
 st.file_uploader("Upload your document:", type=["pdf", "docx", "doc"], accept_multiple_files=False, key="doc", help=None)
-text = st.text_area(label = "Enter your text to summarize", max_chars=2000, placeholder="Max characters: 2000", height=400)
+text = st.text_area(label = "Enter your text to summarize", max_chars=10000, placeholder="Max characters: 2000", height=400)
 
 def typewriter(text: str, speed=10):
     tokens = text.split()
